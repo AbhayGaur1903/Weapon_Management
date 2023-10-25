@@ -1,0 +1,19 @@
+{
+ "content": null,
+ "creation": "2023-10-10 11:13:16.574970",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2023-10-10 11:13:16.574970",
+ "modified_by": "Administrator",
+ "module": "Weapon Management",
+ "name": "weapon-distribution-report",
+ "owner": "Administrator",
+ "page_name": "weapon-distribution-report",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Weapon Distribution Report"
+}
