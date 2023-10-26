@@ -94,6 +94,52 @@ frappe.ui.form.on('Weapon and Ammunition Issue', {
 });
 
 
+// try 1
+// frappe.ui.form.on('Weapon and Ammunition Issue', {
+//     personnel_rfid: function(frm) {
+//         frm.set_value('personnel_id','');
+//         frm.set_value('person_name','');
+//         frm.set_value('rank','');
+//         frm.set_value('weapon_rfid','');
+//         if(frm.doc.personnel_rfid){
+//         frappe.call({
+//             method: 'weapon_management.weapon_management.doctype.weapon_and_ammunition_issue.weapon_and_ammunition_issue.get_rfid',
+//             args: {
+//                 dutyCode: frm.doc.duty_code
+//             },
+//             callback: function(response) {
+//                 var rfidList = response.message;
+//                 if (frm.doc.personnel_rfid && rfidList.includes(frm.doc.personnel_rfid)) {
+//                     frappe.call({
+//                         method: 'weapon_management.weapon_management.doctype.weapon_and_ammunition_issue.weapon_and_ammunition_issue.get_personnels_details',
+//                         args: {
+//                             personnelRFID: frm.doc.personnel_rfid
+//                         },
+//                         callback: function(response) {
+//                             var personnelDetails = response.message;
+//                             if(response.message===1){
+//                                 frm.set_value('personnel_id','');
+//                                 frappe.throw("Person posses a Weapon.")
+//                             }else{
+//                                 frm.set_value('personnel_id', personnelDetails[0]);
+//                                 frm.set_value('person_name', personnelDetails[1]);
+//                                 frm.set_value('rank', personnelDetails[2]);
+//                             }
+//                         }
+//                     });
+//                 } else {
+//                     frappe.throw("Selected Person not Assigned to This Duty.");
+//                     frm.set_value('personnel_rfid', '');
+//                     return;
+//                 }
+//             }
+//         });
+//     }}
+// });
+
+
+// try 2
+
 frappe.ui.form.on('Weapon and Ammunition Issue', {
     personnel_rfid: function(frm) {
         frm.set_value('personnel_id','');
@@ -133,8 +179,21 @@ frappe.ui.form.on('Weapon and Ammunition Issue', {
                 }
             }
         });
+    }
+    if (frm.doc.personnel_rfid){
+        frappe.call({
+            method : 'weapon_management.weapon_management.doctype.weapon_and_ammunition_issue.weapon_and_ammunition_issue.get_certificates',
+            args:{
+                personnelRFID : frm.doc.personnel_rfid
+            },
+            callback: function(response){
+                var certificates = response.message;
+                console.log(`${certificates}`)
+            }
+        })
     }}
 });
+
 
 
 frappe.ui.form.on('Weapon and Ammunition Issue', {

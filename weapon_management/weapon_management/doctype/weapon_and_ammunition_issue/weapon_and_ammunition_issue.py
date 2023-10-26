@@ -43,6 +43,7 @@ def get_rfid(dutyCode):
     return [rf_id[0] for rf_id in rf_ids]
 
 
+
 @frappe.whitelist()
 def get_personnels_details(personnelRFID):
     personnelsDetails = frappe.get_value("Person Master", {"rf_id": personnelRFID, "weapon_issue_status":"Inactive"}, ['name','full_name','rank'])
@@ -50,6 +51,14 @@ def get_personnels_details(personnelRFID):
         return 1
     else:
         return personnelsDetails
+@frappe.whitelist()
+def get_certificates(personnelRFID):
+    name = frappe.get_value("Person Master", {"rf_id": personnelRFID}, pluck="name")
+    certificates = frappe.get_all("Certificate Assigned List", filters={"parent": name}, fields=["certification"])
+    certificatesList = [int(cert['certification']) for cert in certificates]
+
+    frappe.msgprint(str(certificatesList))
+    return certificatesList
 
 
 @frappe.whitelist()
