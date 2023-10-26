@@ -162,9 +162,10 @@
   },
   {
    "fieldname": "armourer_id",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Armourer ID",
+   "options": "Person Master",
    "reqd": 1
   },
   {
@@ -250,7 +251,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-18 18:03:08.983533",
+ "modified": "2023-10-25 16:28:05.477739",
  "modified_by": "Administrator",
  "module": "Weapon Management",
  "name": "Ammunition CheckOut",
